@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Form } from 'react-bootstrap';
+import style from './report.module.css';
 
 class Report extends Component {
 
   render() {
     return (
-        <div>
+        <div className={style.box}>
           <div>
-            <h2> 규빈 님의 면접 분석 결과입니다. </h2>
-            <div>
-              <div>
-                <h3>왼쪽에</h3>
-                <h3>면접 진행시간</h3>
-                <h3>면접 문항</h3>
-                <h3>표정 분석 등급</h3>
+            <h4> 규빈 님의 면접 분석 결과입니다. </h4>
+            <div className={style.form}>
+              <div className={style.leftform}>
+                <h4>면접 진행시간</h4>
+                <h4>면접 문항</h4>
+                <h4>표정 분석 등급</h4>
+                <h4>시선 처리 등급</h4>
               </div>
-              <div>
-                <h3>총 평가 우측에</h3>
-                <h3>더 자세한 결과 내용</h3>
+              <div className={style.rightform}>
+                <div>
+                  <h3>총 평가</h3>
+                  <h3>S 등급</h3>
+                </div>
+                <Button variant="outline-primary" className={style.button}>더 자세한 결과 보기</Button>
               </div>
             </div>
-            <div>
-              <h4>다시하기</h4>
-              <h4>공유 버튼들</h4>
+            <div className={style.buttonbox}>
+              <Button variant="outline-primary" className={style.button}>다시하기</Button>
             </div>
           </div>
         </div>
