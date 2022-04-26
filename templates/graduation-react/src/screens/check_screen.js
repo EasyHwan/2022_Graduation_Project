@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal } from 'react-bootstrap';
-import style from './main.module.css';
+import style from './check.module.css';
 
 function InterviewGuideModal(props) {
   return (
@@ -14,36 +14,30 @@ function InterviewGuideModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-        면접 안내
+          면접 진행 과정
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>1</h4>
         <p>
-          총 5개의 질문
+          60초 동안의 면접 질문 답변 고민 시간
         </p>
         <h4>2</h4>
         <p>
-          이러쿵,
-          저러쿵,
-          찌리쿵
+          90초 동안의 면접 답변 시간
         </p>
         <h4>3</h4>
         <p>
-          이러쿵,
-          저러쿵,
-          찌리쿵
+          반듯한 자세 유지하기
         </p>
         <h4>4</h4>
         <p>
-          이러쿵,
-          저러쿵,
-          찌리쿵
+          준비가 되셨다면 버튼을 눌러 진행해주세요!
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Link to="./check">
-            <Button variant="outline-primary" className={style.button}>확인하고 시작하겠습니다.</Button>
+        <Link to="/test">
+            <Button variant="outline-primary" className={style.button}>시작합니다!</Button>
         </Link>
       </Modal.Footer>
     </Modal>
@@ -61,12 +55,10 @@ class Main extends Component {
       <div className={style.box}>
         <div>
           <div className={style.article}>
-            <h1>면접을 부탁해~~</h1>
-            <h3> 안녕하세요. 규빈 님!! 면접 시작 전 면접 안내를 확인해주세요. </h3>
+            <h3> 면접 환경 테스트 화면입니다. </h3>
           </div>
-
           <div className={style.buttonbox}>
-            <Button variant="outline-primary" onClick={() => this.setState({modalShow : this.state.modalShow = true})} className={style.button}>면접 안내</Button>
+            <Button variant="outline-primary" onClick={() => this.setState({modalShow : this.state.modalShow = true})} className={style.button}>시작하기</Button>
             <InterviewGuideModal
               show={this.state.modalShow}
               onHide={() => this.setState({modalShow : this.state.modalShow = false})}
@@ -77,5 +69,5 @@ class Main extends Component {
     );
   }
 }
-
+  
 export default Main;

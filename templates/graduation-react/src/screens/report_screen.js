@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import style from './report.module.css';
@@ -26,7 +27,9 @@ class Report extends Component {
               </div>
             </div>
             <div className={style.buttonbox}>
-              <Button variant="outline-primary" className={style.button}>다시하기</Button>
+              <Link to="/">
+                <Button variant="outline-primary" className={style.button}>다시하기</Button>
+              </Link>
             </div>
           </div>
         </div>
