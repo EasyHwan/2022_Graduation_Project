@@ -17,6 +17,10 @@ EMOTIONS = ["angry", "disgust", "scared", "happy", "sad", "surprised",
             "neutral"]
 emotionScore = [0] * 7
 
+testFlag = 1
+emotionVal = 0
+gazeVal = 0
+
 
 #feelings_faces = []
 # for index, emotion in enumerate(EMOTIONS):
@@ -34,15 +38,19 @@ while True:
     if gaze.is_blinking():
         gaze.GazeScore["blinking"] += 1
         text = "Blinking"
+        gazeVal += 1
     elif gaze.is_right():
         gaze.GazeScore["right"] += 1
         text = "Looking right"
+        gazeVal += 1
     elif gaze.is_left():
         gaze.GazeScore["left"] += 1
         text = "Looking left"
+        gazeVal += 1
     elif gaze.is_center():
         gaze.GazeScore["center"] += 1
         text = "Looking center"
+        gazeVal += 1
     cv2.putText(frame, text, (90, 60),
                 cv2.FONT_HERSHEY_DUPLEX, 1.6, (147, 58, 31), 2)
     left_pupil = gaze.pupil_left_coords()
@@ -52,7 +60,7 @@ while True:
     cv2.putText(frame, "Right pupil: " + str(right_pupil), (90, 165),
                 cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
     # reading the frame
-    frame = imutils.resize(frame, width=500)
+    #frame = imutils.resize(frame, width=500) -임시삭제
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_detection.detectMultiScale(
         gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
@@ -75,6 +83,7 @@ while True:
         emotion_probability = np.max(preds)
         label = EMOTIONS[preds.argmax()]
         emotionScore[preds.argmax()] += 1
+        emotionVal += 1
 
     else:
         continue
@@ -103,11 +112,27 @@ while True:
 
     cv2.imshow('your_face', frameClone)
     cv2.imshow("Probabilities", canvas)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):  # 삭제 시 실행 X
         break
 
-    print(emotionScore)
-    print(gaze.GazeScore)
+    if testFlag == 1:
+        if emotionVal >= 50:
+            print(emotionScore)
+            if ((emotionScore[0] + emotionScore[1] + emotionScore[2] + emotionScore[4] + emotionScore[5] + emotionScore[6]) * 0.8 >= emotionScore[3]):
+                print("Negative")
+            else:
+                print("positive")
+            emotionVal = 0
+            for i in range(7):
+                emotionScore[i] = 0
+        if gazeVal >= 50:
+            print(gaze.GazeScore)
+            gaze.GazeScore["blinking"] = 0
+            gaze.GazeScore["right"] = 0
+            gaze.GazeScore["left"] = 0
+            gaze.GazeScore["center"] = 0
+            gazeVal = 0
+
 
 camera.release()
 cv2.destroyAllWindows()
