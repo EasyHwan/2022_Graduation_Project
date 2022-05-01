@@ -26,33 +26,67 @@ function RetryButton(props) {
   ); 
 }
 
+function EndModal(props){
+  return(
+    <Modal
+      {...props}
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Body>
+        <p>마지막 질문입니다.</p>
+        <p>결과화면으로 이동할까요?</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Link to="/report">
+            <Button variant="outline-primary" className={style.button}>결과보기</Button>
+        </Link>
+        <Button variant="outline-primary" onClick={props.onHide} className={style.button}>계속 진행하기</Button>
+      </Modal.Footer>
+    </Modal>
+  ); 
+}
+
 function Header(){
   const [question, setQuestion] = useState(1);
   const [second, setSecond] = useState(60);
   const [secondCheck, setSecondCheck] = useState(false);
   const [retryShow, setRetryShow] = useState(false);
   const [thinking, setThinking] = useState(true);
+  const [endShow, setEndShow] = useState(false);
 
   const onClick = () => {
-    setQuestion(question + 1);
-    setSecond(60);
-    setThinking(true);
+    if(question < 5){
+      setQuestion(question + 1);
+      setSecond(60);
+      setThinking(true);
+    }
+    else{
+      setEndShow(true);
+      setThinking(true);
+    }
   };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setSecond(second - 1)
     }, 1000);
-    if(second === -1){
-      setSecondCheck(!secondCheck);
-      if(secondCheck){
-        setSecond(60);
-        setThinking(true);
-        setQuestion(question + 1);
-      }
-      else{
-        setSecond(90);
-        setThinking(false);
+    if(question === 5 && second === -1 && !thinking){
+      setEndShow(true);
+      setSecond(0);
+    }
+    else{
+      if(second === -1){
+        setSecondCheck(!secondCheck);
+        if(secondCheck){
+          setSecond(60);
+          setThinking(true);
+          setQuestion(question + 1);
+        }
+        else{
+          setSecond(90);
+          setThinking(false);
+        }
       }
     }
     return () => clearInterval(timer);
@@ -69,6 +103,10 @@ function Header(){
           <RetryButton
             show={retryShow}
             onHide={() => setRetryShow(false)}
+          />
+          <EndModal
+            show={endShow}
+            onHide={() => setEndShow(false)}
           />
         </div>
       </div>
