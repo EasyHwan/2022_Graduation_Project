@@ -1,0 +1,31 @@
+.box{
+    margin: 0 auto;
+    text-align: center;
+    height: 100vh;
+    background-color: white;
+}
+.article{
+    height: 15vh;
+    background-color: seashell;
+}
+.question{
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+.box2{
+    float: right;
+    padding-top: 20px;
+}
+.button{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.cameraScreen{
+    height: 85vh;
+    background-color: honeydew;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
