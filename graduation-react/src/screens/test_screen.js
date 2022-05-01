@@ -28,30 +28,30 @@ function RetryButton(props) {
 
 function Header(){
   const [question, setQuestion] = useState(1);
-  const [second, setCount] = useState(60);
+  const [second, setSecond] = useState(60);
   const [secondCheck, setSecondCheck] = useState(false);
   const [retryShow, setRetryShow] = useState(false);
   const [thinking, setThinking] = useState(true);
 
   const onClick = () => {
     setQuestion(question + 1);
-    setCount(60);
+    setSecond(60);
     setThinking(true);
   };
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCount(second - 1)
+      setSecond(second - 1)
     }, 1000);
     if(second === -1){
       setSecondCheck(!secondCheck);
       if(secondCheck){
-        setCount(60);
+        setSecond(60);
         setThinking(true);
         setQuestion(question + 1);
       }
       else{
-        setCount(90);
+        setSecond(90);
         setThinking(false);
       }
     }
@@ -75,6 +75,7 @@ function Header(){
     </>
   );
 }
+
 
 class Test extends Component {
 
