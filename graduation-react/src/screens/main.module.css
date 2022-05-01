@@ -1,0 +1,36 @@
+.box{
+    text-align: center;
+    height: 100vh;
+    background-color: honeydew;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.article{
+    height: 30vh;
+    background-color: seashell;
+    display: grid;
+    place-items: center;
+}
+.select{
+    background-color: beige;
+    height: 20vh;
+    display: grid;
+    place-items: center;
+}
+.selectbox{
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+}
+.buttonbox{
+    background-color: darkgrey;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button{
+    margin-left: 5px;
+    margin-right: 5px;
+}
