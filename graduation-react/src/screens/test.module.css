@@ -2,11 +2,11 @@
     margin: 0 auto;
     text-align: center;
     height: 100vh;
-    background-color: white;
+    background-color: #CADEFC;
 }
 .article{
     height: 15vh;
-    background-color: seashell;
+    background-color: #DEFCF9;
 }
 .question{
     position: absolute;
@@ -24,7 +24,6 @@
 }
 .cameraScreen{
     height: 85vh;
-    background-color: honeydew;
     display: flex;
     justify-content: center;
     align-items: center;

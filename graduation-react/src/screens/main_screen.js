@@ -59,13 +59,10 @@ class Main extends Component {
   render() {
     return (
       <div className={style.box}>
-        <div>
-          <div className={style.article}>
-            <h1>면접을 부탁해~~</h1>
-            <h3> 안녕하세요. 규빈 님!! 면접 시작 전 면접 안내를 확인해주세요. </h3>
-          </div>
-
-          <div className={style.buttonbox}>
+        <div className={style.article}>
+          <h1>면접을 부탁해~~</h1>
+          <h3> 안녕하세요. 규빈 님!! 면접 시작 전 면접 안내를 확인해주세요. </h3>
+          <div>
             <Button variant="outline-primary" onClick={() => this.setState({modalShow : this.state.modalShow = true})} className={style.button}>면접 안내</Button>
             <InterviewGuideModal
               show={this.state.modalShow}

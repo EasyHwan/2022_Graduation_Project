@@ -1,22 +1,22 @@
 .box{
     text-align: center;
     height: 100vh;
-    background-color: honeydew;
+    background-color: #DEFCF9;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .form{
     height: 70vh;
-    width: 120vh;
-    background-color: seashell;
-    border: solid;
+    width: 130vh;
+    background-color: #CADEFC;
     display: flex;
     align-items: center;
 }
 .leftform{
     flex: 7;
     height: 50vh;
+    background-color: #C3BEF0;
     float: left;
     border: solid;
     display: grid;
@@ -27,6 +27,7 @@
 .rightform{
     flex: 3;
     height: 50vh;
+    background-color: #C3BEF0;
     float: right;
     border: solid;
     display: grid;
@@ -35,7 +36,8 @@
     margin-right: 15px;
 }
 .buttonbox{
-    background-color: darkgrey;
+    background-color: #CADEFC;
+    border: solid;
     height: 10vh;
     display: grid;
     place-items: center;
