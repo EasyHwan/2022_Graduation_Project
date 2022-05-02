@@ -75,7 +75,6 @@ function Header(){
         }
       }
     }
-    
   };
 
   useEffect(() => {
@@ -127,7 +126,6 @@ function Header(){
 
 
 class Test extends Component {
-
   render() {
     return (
         <div>
