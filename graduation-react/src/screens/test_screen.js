@@ -56,15 +56,26 @@ function Header(){
   const [endShow, setEndShow] = useState(false);
 
   const onClick = () => {
-    if(question < 5){
-      setQuestion(question + 1);
-      setSecond(60);
-      setThinking(true);
+    if(thinking){
+      // 생각시간은 못넘어가게 팝업 창 잠시 띄우기
     }
     else{
-      setEndShow(true);
-      setThinking(true);
+      if(second > 30){
+        // 60초이상 지난 후 지나갈 수 있다는 팝업 창 잠시 띄우기
+      }
+      else{
+        if(question < 5){
+          setQuestion(question + 1);
+          setSecond(60);
+          setThinking(true);
+        }
+        else{
+          setEndShow(true);
+          setThinking(true);
+        }
+      }
     }
+    
   };
 
   useEffect(() => {
