@@ -5,14 +5,18 @@ from keras.models import load_model
 import numpy as np
 from gaze_tracking import GazeTracking
 
+# 함수명 : test_start
+# 기능 : 전체 분석을 시작하기 위한 함수
+# 작성일자 : 2022/05/08
+
 
 def test_start():
-    # parameters for loading data and images
+    # 데이터와 이미지를 로딩하기 위한 매개변수들
     detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
     emotion_model_path = 'models/_mini_XCEPTION.102-0.66.hdf5'
 
-    # hyper-parameters for bounding boxes shape
-    # loading models
+    # 박스의 모양을 바운딩하기 위한 매개변수들
+    # 모델 로딩
     face_detection = cv2.CascadeClassifier(detection_model_path)
     emotion_classifier = load_model(emotion_model_path, compile=False)
     EMOTIONS = ["angry", "disgust", "scared", "happy", "sad", "surprised",
@@ -23,11 +27,7 @@ def test_start():
     emotionVal = 0
     gazeVal = 0
 
-    #feelings_faces = []
-    # for index, emotion in enumerate(EMOTIONS):
-    # feelings_faces.append(cv2.imread('emojis/' + emotion + '.png', -1))
-
-    # starting video streaming
+    # 비디오 스트리밍 시작
     cv2.namedWindow('your_face')
     gaze = GazeTracking()
     camera = cv2.VideoCapture(0)
@@ -36,17 +36,17 @@ def test_start():
         gaze.refresh(frame)
         frame = gaze.annotated_frame()
         text = ""
-        if gaze.is_blinking():
-            gaze.GazeScore["blinking"] += 1
-            text = "Blinking"
-            gazeVal += 1
-        elif gaze.is_right():
+        if gaze.is_right():
             gaze.GazeScore["right"] += 1
-            text = "Looking right"
+            text = "right"
             gazeVal += 1
         elif gaze.is_left():
             gaze.GazeScore["left"] += 1
-            text = "Looking left"
+            text = "left"
+            gazeVal += 1
+        elif gaze.is_blinking():
+            gaze.GazeScore["blinking"] += 1
+            text = "blinking"
             gazeVal += 1
         elif gaze.is_center():
             gaze.GazeScore["center"] += 1
@@ -56,12 +56,12 @@ def test_start():
                     cv2.FONT_HERSHEY_DUPLEX, 1.6, (147, 58, 31), 2)
         left_pupil = gaze.pupil_left_coords()
         right_pupil = gaze.pupil_right_coords()
-        cv2.putText(frame, "Left pupil:  " + str(left_pupil), (90, 130),
-                    cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
-        cv2.putText(frame, "Right pupil: " + str(right_pupil), (90, 165),
-                    cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
-        # reading the frame
-        #frame = imutils.resize(frame, width=500) -임시삭제
+        # cv2.putText(frame, "Left pupil:  " + str(left_pupil), (90, 130),
+        #           cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
+        # cv2.putText(frame, "Right pupil: " + str(right_pupil), (90, 165),
+        #           cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
+
+        # 프레임을 읽어낸다
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_detection.detectMultiScale(
             gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
@@ -72,8 +72,8 @@ def test_start():
             faces = sorted(faces, reverse=True,
                            key=lambda x: (x[2] - x[0]) * (x[3] - x[1]))[0]
             (fX, fY, fW, fH) = faces
-            # Extract the ROI of the face from the grayscale image, resize it to a fixed 28x28 pixels, and then prepare
-            # the ROI for classification via the CNN
+
+            # CNN 분류를 위한 ROI 추출
             roi = gray[fY:fY + fH, fX:fX + fW]
             roi = cv2.resize(roi, (64, 64))
             roi = roi.astype("float") / 255.0
@@ -90,12 +90,10 @@ def test_start():
             continue
 
         for (i, (emotion, prob)) in enumerate(zip(EMOTIONS, preds)):
-            # construct the label text
+            # 라벨링 텍스트를 만든다
             text = "{}: {:.2f}%".format(emotion, prob * 100)
 
-            # draw the label + probability bar on the canvas
-            # emoji_face = feelings_faces[np.argmax(preds)]
-
+            # 화면에 라벨과 확률 바를 그린다
             w = int(prob * 300)
             cv2.rectangle(canvas, (7, (i * 35) + 5),
                           (w, (i * 35) + 35), (0, 0, 255), -1)
@@ -106,13 +104,9 @@ def test_start():
                         cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
             cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
                           (0, 0, 255), 2)
-    #       for c in range(0, 3):
-    #        frame[200:320, 10:130, c] = emoji_face[:, :, c] * \
-    #        (emoji_face[:, :, 3] / 255.0) + frame[200:320,
-    #        10:130, c] * (1.0 - emoji_face[:, :, 3] / 255.0)
 
         cv2.imshow('your_face', frameClone)
-        cv2.imshow("Probabilities", canvas)
+        #cv2.imshow("Probabilities", canvas)
         if cv2.waitKey(1) & 0xFF == ord('q'):  # 삭제 시 실행 X
             break
 

@@ -1,8 +1,8 @@
 IMAGE_NAME=gaze-tracking
 
-# allow root access to x server
+# root가 x server 접근할 수 있게 허락
 xhost local:root
-# build and run docker image
+# build,run docker image
 ([ "$(docker images -q ${IMAGE_NAME})" == "" ] && docker build -t ${IMAGE_NAME} . ) 
 ([ "$(docker images -q ${IMAGE_NAME})" != "" ] && \
 docker run --rm --device /dev/video0 \
