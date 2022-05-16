@@ -1,3 +1,4 @@
+from PIL import ImageFont, ImageDraw, Image
 from keras.preprocessing.image import img_to_array
 import imutils
 import cv2
@@ -19,7 +20,7 @@ def test_start():
     # 모델 로딩
     face_detection = cv2.CascadeClassifier(detection_model_path)
     emotion_classifier = load_model(emotion_model_path, compile=False)
-    EMOTIONS = ["angry", "disgust", "scared", "happy", "sad", "surprised",
+    EMOTIONS = ["serious", "disgust", "scared", "smile", "sad", "surprised",
                 "neutral"]
     emotionScore = [0] * 7
 
@@ -54,12 +55,6 @@ def test_start():
             gazeVal += 1
         cv2.putText(frame, text, (90, 60),
                     cv2.FONT_HERSHEY_DUPLEX, 1.6, (147, 58, 31), 2)
-        left_pupil = gaze.pupil_left_coords()
-        right_pupil = gaze.pupil_right_coords()
-        # cv2.putText(frame, "Left pupil:  " + str(left_pupil), (90, 130),
-        #           cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
-        # cv2.putText(frame, "Right pupil: " + str(right_pupil), (90, 165),
-        #           cv2.FONT_HERSHEY_DUPLEX, 0.9, (147, 58, 31), 1)
 
         # 프레임을 읽어낸다
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -82,13 +77,15 @@ def test_start():
 
             preds = emotion_classifier.predict(roi)[0]
             emotion_probability = np.max(preds)
-            label = EMOTIONS[preds.argmax()]
+            if (emotionScore[0] + emotionScore[1] + emotionScore[2] + emotionScore[4] + emotionScore[5] + emotionScore[6]) * 0.8 >= emotionScore[3]:
+                label = "Not smiling"
+            else:
+                label = "smiling"
             emotionScore[preds.argmax()] += 1
             emotionVal += 1
 
         else:
             continue
-
         for (i, (emotion, prob)) in enumerate(zip(EMOTIONS, preds)):
             # 라벨링 텍스트를 만든다
             text = "{}: {:.2f}%".format(emotion, prob * 100)
