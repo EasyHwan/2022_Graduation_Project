@@ -53,7 +53,7 @@ class Calibration(object):
     # 작성일자 : 2022/04/26
     @staticmethod
     def find_best_threshold(eye_frame):
-        average_iris_size = 0.7  # 0.48
+        average_iris_size = 0.7  # 원래는 0.48, 눈동자 수월하게 감지 위해 상향 조정
         trials = {}
 
         for threshold in range(5, 100, 5):
