@@ -14,3 +14,21 @@
     place-items: center;
     border-radius: 20px;
 }
+.checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #C3BEF0;
+    height: 50vh;
+    width: 100vh;
+}
+.camera{
+    border: solid;
+    height: 40vh;
+    width: 50vh;
+}
+.voice{
+    border: solid;
+    height: 40vh;
+    width: 50vh;
+}
