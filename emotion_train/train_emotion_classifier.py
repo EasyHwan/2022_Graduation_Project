@@ -5,8 +5,8 @@ Description: Train emotion classification model
 from keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 from keras.callbacks import ReduceLROnPlateau
 from keras.preprocessing.image import ImageDataGenerator
-from load_and_process import load_fer2013
-from load_and_process import preprocess_input
+from emotion_train.load_and_process import load_fer2013
+from emotion_train.load_and_process import preprocess_input
 from models.cnn import mini_XCEPTION
 from sklearn.model_selection import train_test_split
 
