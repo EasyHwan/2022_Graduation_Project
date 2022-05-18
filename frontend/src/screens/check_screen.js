@@ -70,8 +70,14 @@ class Main extends Component {
       <div className={style.box}>
         <div className={style.article}>
           <h1> 면접 환경 테스트 화면입니다. </h1>
-          <h3> 카메라 확인 </h3>
-          <h3> 음성 확인 </h3>
+          <div className={style.checkbox}>
+            <div className={style.camera}>
+              <h3> 카메라 확인 </h3>
+            </div>
+            <div className={style.voice}>
+              <h3> 음성 확인 </h3>
+            </div>
+          </div>
           <div>
             <Button variant="outline-primary" onClick={() => this.setState({modalShow : true})} className={style.button}>시작하기</Button>
             <InterviewGuideModal
