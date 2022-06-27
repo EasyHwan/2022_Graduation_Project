@@ -1,34 +1,60 @@
 .box{
     text-align: center;
     height: 100vh;
-    background-color: #DEFCF9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #fff;
 }
-.article{
-    height: 70vh;
-    width: 130vh;
-    background-color: #CADEFC;
-    display: grid;
-    place-items: center;
-    border-radius: 20px;
+
+.currentPage{
+    width: 40vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.cameraBox{
+    width: 40%;
+    margin-top: 30px;
 }
 .checkbox{
     display: flex;
-    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.fontStyle{
+    font-family: 'Noto Sans KR';
+    font-weight: bold;
+}
+.cameraCheck{
+    width: 30vh;
+    height: 8vh;
+    background: #D1E3FE;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    display: flex;
     justify-content: space-around;
-    background-color: #C3BEF0;
-    height: 50vh;
-    width: 100vh;
+    align-items: center;
+    margin-right: 10px;
 }
-.camera{
-    border: solid;
-    height: 40vh;
-    width: 50vh;
+.cameraSize{
+    width: 15%;
 }
-.voice{
-    border: solid;
-    height: 40vh;
-    width: 50vh;
+.voiceCheck{
+    width: 30vh;
+    height: 8vh;
+    background: #D1E3FE;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 10px;
+}
+.microphoneSize{
+    width: 15%;
+}
+.button{
+    width: 222px;
+    height: 57px;
+    background: #1E84FD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    margin-top: 30px;
 }
