@@ -4,6 +4,7 @@ import Main from './screens/main_screen';
 import Test from './screens/test_screen';
 import Report from './screens/report_screen';
 import Check from './screens/check_screen';
+import Guide from './screens/guide_screen';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <Routes> 
             <Route path="/" element={<Main />}/>
             <Route path="/check" element={<Check />}/>
+            <Route path="/guide" element={<Guide />}/>
             <Route path="/test" element={<Test />}/>
             <Route path="/report" element={<Report />}/> 
           </Routes>
