@@ -62,7 +62,7 @@ class Main extends Component {
           <img src = "images/currentPage1.png" className={style.currentPage} alt="profile" />
           <br/>
           <PermissionCheck/>
-          <Link to="/test">
+          <Link to="/guide">
             <Button className={style.button}>테스트 안내</Button>
           </Link>
       </div>
