@@ -5,15 +5,15 @@
 }
 
 .currentPage{
-    width: 40vh;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 35vh;
+    margin-top: 10px;
 }
 .swiperPos{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70vh;
+    margin-top: 30px;
 }
 .fontStyle{
     font-family: 'Noto Sans KR';

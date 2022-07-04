@@ -5,13 +5,13 @@
 }
 
 .currentPage{
-    width: 40vh;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 35vh;
+    margin-top: 10px;
 }
 .cameraBox{
     width: 40%;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
 .checkbox{
     display: flex;
