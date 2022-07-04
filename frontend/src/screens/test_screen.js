@@ -14,15 +14,19 @@ function RetryButton(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Body>
-        <p>지금까지 진행사항은 기록되지 않습니다!!</p>
-        <p>진행을 멈추고 시작화면으로 돌아갈까요??</p>
+      <Modal.Body className={style.modalBody}>
+        <p>지금까지 진행사항은 기록되지 않습니다!</p>
+        <p>진행을 멈추고 시작화면으로 돌아갈까요?</p>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer 
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
         <Link to="/">
-            <Button variant="outline-primary" className={style.button}>다시하기</Button>
+            <Button className={style.button}>종료하기</Button>
         </Link>
-        <Button variant="outline-primary" onClick={props.onHide} className={style.button}>계속 진행하기</Button>
+        <Button onClick={props.onHide} className={style.button}>계속 진행하기</Button>
       </Modal.Footer>
     </Modal>
   ); 
@@ -35,15 +39,20 @@ function EndModal(props){
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Body>
+      <Modal.Body className={style.modalBody}>
         <p>마지막 질문입니다.</p>
         <p>결과화면으로 이동할까요?</p>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Link to="/report">
-            <Button variant="outline-primary" className={style.button}>결과보기</Button>
+            <Button className={style.button}>결과보기</Button>
         </Link>
-        <Button variant="outline-primary" onClick={props.onHide} className={style.button}>계속 진행하기</Button>
+        <Button onClick={props.onHide} className={style.button}>계속 진행하기</Button>
       </Modal.Footer>
     </Modal>
   ); 
@@ -119,22 +128,32 @@ function Header(){
 
   return(
     <>
-      <div className={style.article}>
-        <h2 className={style.question}>Q{question}. {content.content} </h2>
-        <div className={style.box2}>
-        <h4>{second} {thinking ? "(생각시간)" : "(답변시간)"} </h4>
-          <Button variant="outline-primary" onClick={onClick} className={style.button}>다음 질문</Button>
-          <Button variant="outline-primary" onClick={() => setRetryShow(true)} className={style.button}>다시하기</Button>
-          <RetryButton
-            show={retryShow}
-            onHide={() => setRetryShow(false)}
-          />
-          <EndModal
-            show={endShow}
-            onHide={() => setEndShow(false)}
-          />
+        <div>
+          <img src = "images/currentPage3.png" className={style.currentPage} alt="profile" />
+          <div className={style.box2}>
+            <div>
+              <label style={{fontWeight : 'bold'}}> {thinking ? "생각시간" : "답변시간"} </label>
+              <h2>{second}</h2>
+              <Button onClick={onClick} className={style.button}>다음 질문</Button>
+            </div>
+            <div className={style.questionBox}>
+              <label>Q{question}. {content.content} </label>
+            </div>
+            <div>
+              <label style={{fontWeight : 'bold', color:'white'}}> 빈자리 </label>
+              <h2 style={{fontWeight : 'bold', color:'white'}}>{second}</h2>
+              <Button onClick={() => setRetryShow(true)} className={style.button}>종료하기</Button>
+              <RetryButton
+                show={retryShow}
+                onHide={() => setRetryShow(false)}
+              />
+            </div>
+            <EndModal
+                show={endShow}
+                onHide={() => setEndShow(false)}
+              />
+          </div>
         </div>
-      </div>
     </>
   );
 }
@@ -146,8 +165,10 @@ class Test extends Component {
         <div>
           <div className={style.box}>
             <Header/>
-            <div className={style.cameraScreen}>
-              <h3>렌더링한 영상 화면</h3>
+            <div className={style.cameraDisplay}>
+              <div className={style.cameraScreen}>
+                <h3>렌더링한 영상 화면</h3>
+              </div>
             </div>
           </div>
         </div>
