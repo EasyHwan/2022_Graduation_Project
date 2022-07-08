@@ -1,17 +1,41 @@
 .box{
     text-align: center;
     height: 100vh;
-    background-color: #DEFCF9;
+    background-color: #fff;
+}
+.currentPage{
+    width: 35vh;
+    margin-top: 10px;
+}
+.reportForm{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .form{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.Evaluate{
     height: 70vh;
-    width: 130vh;
-    background-color: #CADEFC;
-    display: flex;
-    align-items: center;
+    width: 150vh;
+    background: #F4F4F4;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    display: grid;
+    place-content: center;
+}
+.contentEvaluate{
+    height: 60vh;
+    width: 120vh;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
 }
 .leftform{
     flex: 7;
@@ -34,14 +58,8 @@
     margin-left: 15px;
     margin-right: 15px;
 }
-.buttonbox{
-    background-color: #CADEFC;
-    border: solid;
-    height: 10vh;
-    display: grid;
-    place-items: center;
-}
 .button{
-    margin-left: 5px;
-    margin-right: 5px;
+    background: #1E84FD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
 }
