@@ -15,11 +15,6 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
-.form{
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
 .Evaluate{
     height: 70vh;
     width: 150vh;
@@ -36,27 +31,29 @@
     border: 1px solid rgba(0, 0, 0, 0.4);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
-.leftform{
-    flex: 7;
-    height: 50vh;
-    background-color: #C3BEF0;
-    float: left;
-    border: solid;
+.contentEvaluate2{
+    height: 60vh;
+    width: 120vh;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    overflow: auto;
     text-align: left;
-    margin-left: 15px;
-    margin-right: 15px;
+    justify-content: center;
 }
-.rightform{
-    flex: 3;
-    height: 50vh;
-    background-color: #C3BEF0;
-    float: right;
-    border: solid;
-    display: grid;
-    place-items: center;
-    margin-left: 15px;
-    margin-right: 15px;
+.scoreBox{
+    text-align: left;
+}
+.detailContent{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .button{
     background: #1E84FD;
