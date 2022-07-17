@@ -16,6 +16,7 @@
 
 ## 동작 방식
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/74391185/168950892-776ecf51-af0b-4956-98d7-b506286ca81e.png">
+<img width="1153" alt="스크린샷 2022-07-17 오후 11 50 36" src="https://user-images.githubusercontent.com/70309113/179404631-2a6105c7-544c-4d6c-80fc-32a7232209ee.png">
 
 ## 분석 결과
 
