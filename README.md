@@ -9,13 +9,16 @@
 - AI 면접 대비의 중요성은 날이 갈수록 더해지고 있지만, AI면접에 대한 대비는 생각보다 추상적이고 어려운 문제입니다.
 - AI 모의 면접 서비스가 생긴다면, 구직자들의 니즈를 충분히 만족시켜줄 수 있다고 판단하였습니다.
 
+## UI 디자인
+<img width="497" alt="스크린샷 2022-08-08 오후 6 31 25" src="https://user-images.githubusercontent.com/70309113/183386903-b979d1cc-269d-432c-adf1-e07ad4656e32.png">
+
 ## 기술 스택
-- Front-end: React.js
-- Back-end: Flask, Mysql
-- AI: Tensorflow, Keras, OpenCV
+- Front-end : React.js
+- Back-end : Flask, Mysql
+- AI : Tensorflow, Keras, OpenCV
+- Design : Figma
 
 ## 동작 방식
-<img width="600" alt="image" src="https://user-images.githubusercontent.com/74391185/168950892-776ecf51-af0b-4956-98d7-b506286ca81e.png">
 <img width="1153" alt="스크린샷 2022-07-17 오후 11 50 36" src="https://user-images.githubusercontent.com/70309113/179404631-2a6105c7-544c-4d6c-80fc-32a7232209ee.png">
 
 ## 분석 결과
