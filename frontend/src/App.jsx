@@ -1,10 +1,10 @@
 import React, { Component } from 'react'; 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './screens/main_screen';
-import Test from './screens/test_screen';
-import Report from './screens/report_screen';
-import Check from './screens/check_screen';
-import Guide from './screens/guide_screen';
+import Main from './screens/main/main_screen';
+import Test from './screens/test/test_screen';
+import Report from './screens/report/report_screen';
+import Check from './screens/check/check_screen';
+import Guide from './screens/guide/guide_screen';
 
 class App extends Component {
   render() {
