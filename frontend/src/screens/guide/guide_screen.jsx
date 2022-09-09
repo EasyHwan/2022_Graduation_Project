@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
-import style from './guide.module.css';
+import guide2 from '../../assets/images/guide2.svg';
+import style from './guide.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import 'swiper/scss'
@@ -16,7 +17,7 @@ class Guide extends Component {
   render() {
     return (
       <div className={style.box}>
-        <img src = "images/currentPage2.png" className={style.currentPage} alt="profile" />
+        <img src={guide2} className={style.currentPage} alt="profile" />
         <div className={style.swiperPos}>
             <Swiper
             slidesPerView={2}

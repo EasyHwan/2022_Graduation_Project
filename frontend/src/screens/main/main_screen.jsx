@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './main.module.css';
+import style from './main.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 import 'swiper/scss'

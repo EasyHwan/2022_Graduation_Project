@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal } from 'react-bootstrap';
-import style from './test.module.css';
+import guide3 from '../../assets/images/guide3.svg';
+import style from './test.module.scss';
 
 const url = 'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b4a43f78-2dd7-4b6e-9097-7f381352058a/questionSample.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220517%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220517T113804Z&X-Amz-Expires=86400&X-Amz-Signature=95e5cf6e14cf99166e8a4c12736589edd26226e56adad4ede422f9392c26eb01&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22questionSample.json%22&x-id=GetObject'
 
@@ -129,7 +130,7 @@ function Header(){
   return(
     <>
         <div>
-          <img src = "images/currentPage3.png" className={style.currentPage} alt="profile" />
+          <img src={guide3} className={style.currentPage} alt="profile" />
           <div className={style.box2}>
             <div>
               <label style={{fontWeight : 'bold'}}> {thinking ? "생각시간" : "답변시간"} </label>
