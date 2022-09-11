@@ -1,73 +1,46 @@
-import React, { Component } from 'react';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button,  } from 'react-bootstrap';
-import style from './check.module.css';
+import React from 'react';
+import { useState } from 'react';
+import guide1 from '../../assets/images/guide1.svg';
+import style from './check.module.scss';
 import Webcam from 'react-webcam';
+import Switch from '@mui/material/Switch';
 
-function PermissionCheck () {
-  const [camCheck, setCamCheck] = useState(false);
-  const [micCheck, setMicCheck] = useState(false);
-  
-  useEffect(() => {
-    navigator.permissions.query({name:'camera'}).then(function(result) {
-      if (result.state === 'granted') {
-        setCamCheck(true);
-      } else{
-        setCamCheck(false);
-      }
-    });
-    navigator.permissions.query({name:'microphone'}).then(function(result) {
-      if (result.state === 'granted') {
-        setMicCheck(true);
-      } else {
-        setMicCheck(false);
-      }
-    });
-  },[camCheck, micCheck])
+
+function Check () {
+  const [isShowVideo, setIsShowVideo] = useState(false);
+
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: "user"
+  };
+
+  const startCam = () => {
+    !isShowVideo ?
+    setIsShowVideo(true)
+    :setIsShowVideo(false);
+  }
+
+  const goTo = () => {
+    window.location.assign('/guide')
+  }
 
   return (
-    <>
-      <Webcam className={style.cameraBox} audio />
+    <div className={style.box}>
+      <img src={guide1} className={style.currentPage} alt="profile" />
+      {
+        isShowVideo ? <Webcam className={style.cameraBox} audio videoConstraints={videoConstraints}/> 
+        : <div className={style.emptySpace}/>
+      }
       <div className={style.checkbox}>
         <div className={style.cameraCheck}>
-          <img src = "images/video-camera.png" className={style.cameraSize} alt="profile" />
-          <h4 className={style.fontStyle}> 카메라 </h4>
-          {
-            camCheck ?
-            <img src = "images/check.png" className={style.cameraSize} alt="profile" />
-            : <img src = "images/false.png" className={style.cameraSize} alt="profile" />
-          }
+          <Switch checked={isShowVideo} onChange={startCam} />
+          카메라 / 마이크 권한 확인하기
         </div>
-        <div className={style.voiceCheck}>
-          <img src = "images/microphone.png" className={style.microphoneSize} alt="profile" />
-          <h4 className={style.fontStyle}> 마이크 </h4>
-          {
-            micCheck ?
-            <img src = "images/check.png" className={style.cameraSize} alt="profile" />
-            : <img src = "images/false.png" className={style.cameraSize} alt="profile" />
-          }
-        </div>
+        <button onClick={goTo} className={style.button} disabled={!isShowVideo}>테스트 안내</button>
       </div>
-    </>
+    </div>
   );
 }
-
-class Main extends Component {
-
-  render() {
-    return (
-      <div className={style.box}>
-          <img src = "images/currentPage1.png" className={style.currentPage} alt="profile" />
-          <br/>
-          <PermissionCheck/>
-          <Link to="/guide">
-            <Button className={style.button}>테스트 안내</Button>
-          </Link>
-      </div>
-    );
-  }
-}
   
-export default Main;
+export default Check;
