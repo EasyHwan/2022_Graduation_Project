@@ -152,5 +152,30 @@ def s3_upload():
         print('예외가 발생했습니다.', e)
         return str(e)
 
+
+@app.route('/s3-upload2', methods=['POST'])
+def s3_upload2():
+    try:
+        file_name = request.args.get('file_name')
+        data = request.form['data']
+        bucket = os.environ.get('BUCKET_NAME')
+        s3 = boto3.client(
+            's3',
+            region_name='ap-northeast-2',
+            aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
+            aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
+        )
+        #content="requirement.txt"
+        #s3.Object('s3-video-example', 'exxx.txt').put(Body=content)
+        s3.put_object(
+            Bucket=bucket,
+            Body=data,
+            Key=file_name,
+            ContentType='video/mp4')
+        return "success"
+    except Exception as e:
+        print('예외가 발생했습니다.', e)
+        return str(e)
+
 if __name__ == "__main__":
     app.run()
