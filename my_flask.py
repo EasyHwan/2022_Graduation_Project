@@ -65,11 +65,11 @@ def question():
         return "you have to include question_no (2 <= no <= 5)"
 
 
-'''@app.route('/s3-upload', methods=['POST'])
+@app.route('/s3-upload', methods=['POST'])
 def s3_upload():
     try:
         file_name = request.form['file_name']
-        data = request.form['data']
+        data = request.files['data']
         bucket = os.environ.get('BUCKET_NAME')
         s3 = boto3.client(
             's3',
@@ -94,7 +94,7 @@ def s3_upload():
 def s3_upload2():
     try:
         file_name = request.args.get('file_name')
-        data = request.form['data']
+        data = request.files['data']
         bucket = os.environ.get('BUCKET_NAME')
         s3 = boto3.client(
             's3',
@@ -112,7 +112,7 @@ def s3_upload2():
         return "success"
     except Exception as e:
         print('예외가 발생했습니다.', e)
-        return str(e)'''
+        return str(e)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=8000)
