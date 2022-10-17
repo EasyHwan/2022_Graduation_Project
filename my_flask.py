@@ -12,7 +12,7 @@ import requests # pip install requests
 import boto3
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 
 @app.route('/')
