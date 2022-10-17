@@ -16,11 +16,13 @@ CORS(app)
 
 
 @app.route('/')
+@cross_origin()
 def index():
     return "hi"
 
 
 @app.route('/question')
+@cross_origin()
 def question():
     num = int(request.args.get('no', "1"))
     conn = pymysql.connect(
@@ -66,6 +68,7 @@ def question():
 
 
 @app.route('/s3-upload', methods=['POST'])
+@cross_origin()
 def s3_upload():
     try:
         file_name = request.form['file_name']
@@ -91,6 +94,7 @@ def s3_upload():
 
 
 @app.route('/s3-upload2', methods=['POST'])
+@cross_origin()
 def s3_upload2():
     try:
         file_name = request.args.get('file_name')
