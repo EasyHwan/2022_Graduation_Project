@@ -4,7 +4,7 @@ import pymysql
 import json
 from dotenv import load_dotenv
 import os
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 import sys, os, base64, datetime, hashlib, hmac
 import requests # pip install requests
