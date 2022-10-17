@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request
+from flask import request, Response
 import pymysql
 import json
 from dotenv import load_dotenv
@@ -16,9 +16,11 @@ CORS(app, supports_credentials=True)
 
 
 @app.route('/')
-@cross_origin()
 def index():
-    return "hi"
+    my_res = flask.Response("hi")
+    my_res.headers["Access-Control-Allow-Origin"] = "*"
+    my_res.headers["Access-Control-Allow-Credentials"] = "true"
+    return my_res
 
 
 @app.route('/question')
