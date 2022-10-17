@@ -13,7 +13,7 @@ import boto3
 
 app = Flask(__name__)
 #CORS(app, supports_credentials=True)
-CORS(app, resources={r'*': {'origins': ['https://letmeinterview.vercel.app', 'http://localhost:3000']}})
+CORS(app, resources={r'*': {'origins': ['https://letmeinterview.vercel.app', 'http://localhost:3000']}}, supports_credentials=True)
 
 
 
