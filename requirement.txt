@@ -5,3 +5,8 @@ numpy==1.17.4
 imutils==0.5.3
 scikit_learn==0.22.1
 dlib == 19.16.0
+SpeechRecognition
+librosa
+pyaudio
+keyboard
+playsound
