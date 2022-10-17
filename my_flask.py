@@ -20,8 +20,6 @@ CORS(app, resources={r'*': {'origins': ['https://letmeinterview.vercel.app', 'ht
 @app.route('/')
 def index():
     my_res = flask.Response("hi")
-    my_res.headers["Access-Control-Allow-Origin"] = "*"
-    my_res.headers["Access-Control-Allow-Credentials"] = "true"
     return my_res
 
 
