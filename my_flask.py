@@ -8,6 +8,7 @@ from flask_cors import CORS, cross_origin
 
 import sys, os, base64, datetime, hashlib, hmac
 import requests # pip install requests
+from habit import *
 
 import boto3
 
@@ -24,7 +25,6 @@ def index():
 
 
 @app.route('/question')
-@cross_origin()
 def question():
     num = int(request.args.get('no', "1"))
     conn = pymysql.connect(
@@ -119,6 +119,29 @@ def s3_upload2():
     except Exception as e:
         print('예외가 발생했습니다.', e)
         return str(e)
+
+
+@app.route('/habit', methods=['POST'])
+def habit_post():
+    sound_data = request.files['data']
+    name = request.args.get('name')
+
+    conn = pymysql.connect(
+        user=os.environ.get("MYSQL_USER"),
+        password=os.environ.get("MYSQL_PASSWORD"),
+        host=os.environ.get("MYSQL_HOST"),
+        db=os.environ.get("MYSQL_DB"),
+        charset='utf8mb4'
+    )
+    sound_count = analyze_habit(sound_data)
+    word = ['아', '아니', '그', '음', '어', '습', '엄']
+    with conn:
+        with conn.cursor() as cur:
+            for i in range(len(word)):
+                cur.execute("INSERT INTO habit_word (name, word, count) VALUES ('%s', '%s', '%s')" % (name, word[i], sound_count[i]))
+                conn.commit()
+    return "success"
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
