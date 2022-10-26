@@ -135,12 +135,16 @@ def habit_post():
     )
     sound_count = analyze_habit(sound_data)
     word = ['아', '아니', '그', '음', '어', '습', '엄']
+    ret = {}
     with conn:
         with conn.cursor() as cur:
             for i in range(len(word)):
                 cur.execute("INSERT INTO habit_word (name, word, count) VALUES ('%s', '%s', '%s')" % (name, word[i], sound_count[i]))
                 conn.commit()
-    return "success"
+                temp = {}
+                ret[word[i]] = sound_count[i]
+
+    return ret
 
 
 if __name__ == "__main__":
