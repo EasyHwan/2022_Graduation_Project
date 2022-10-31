@@ -5,6 +5,7 @@ import json
 from dotenv import load_dotenv
 import os
 from flask_cors import CORS, cross_origin
+import bcrypt
 
 import sys, os, base64, datetime, hashlib, hmac
 import requests # pip install requests
@@ -183,33 +184,28 @@ def gaze_post():
     return ret
 
 
-@app.route('/form', methods=['POST'])
+@app.route('/name', methods=['POST'])
 def form_post():
-    data = request.files['data']
-    data.save('src/' + data.filename)
-    ret = {"msg":"success"}
-    '''    
-    ret["ret"] = data.read()
-    print(data.open())
-    print("--------------")
+    params = request.get_json()
+    name = params['name']
+    b = bcrypt.hashpw(name.encode('utf-8'), bcrypt.gensalt())
+    b = b.decode('utf-8')
+    uname = name + "#" + b[9:13].upper()
 
-    print(data)
-    print(dir(data))
-    print(data.headers)
-    print(data.mimetype)
-    print(data.name)
-    print(data.filename)
+    conn = pymysql.connect(
+        user=os.environ.get("MYSQL_USER"),
+        password=os.environ.get("MYSQL_PASSWORD"),
+        host=os.environ.get("MYSQL_HOST"),
+        db=os.environ.get("MYSQL_DB"),
+        charset='utf8mb4'
+    )
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("INSERT INTO user (name, uname) VALUES ('%s', '%s')" % (name, uname))
+            conn.commit()
 
-    print(dir(data.stream))
-    print(dir(data.stream.read))
-    print(data.stream.seek(0))
-    print(dir(data.read))
+    ret = {"msg": uname}
 
-    print(data.stream.read)
-    print(data.save)
-    fp = data.stream().seek(0)
-    print(fp.read())
-    '''
     return ret
 
 if __name__ == "__main__":
