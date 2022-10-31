@@ -152,7 +152,9 @@ def habit_post():
             print(ret)
             sound_count = analyze_habit(f"src/{sound_data.filename}.wav")
         except Exception as ee:
-
+            delete_file = f"./src/{sound_data.filename}"
+            if os.path.isfile(delete_file):
+                os.remove(delete_file)
             return {
                 "msg" : str(ee)
             }
