@@ -137,7 +137,14 @@ def habit_post():
         db=os.environ.get("MYSQL_DB"),
         charset='utf8mb4'
     )
-    sound_count = analyze_habit(sound_data)
+    try:
+        sound_count = analyze_habit(sound_data)
+    except Exception as e:
+        return {
+            "error":str(e),
+            "content_type":str(sound_data.content_type),
+            "mimetype": str(sound_data.mimetype)
+        }
     word = ['아', '아니', '그', '음', '어', '습', '엄']
     ret = {}
     with conn:
@@ -234,6 +241,10 @@ def result():
             res = cur.fetchall()
             #print(res)
     return "ok"
+'''
+((1, 'name', 53, 141, 0, 5), (2, 'name', 0, 0, 0, 0), (3, 'name', 53, 141, 0, 5), (4, 'name', 53, 141, 0, 5), (5, 'name', 7, 180, 6, 26), (6, 'name', 7, 180, 6, 26), (7, 'name', 97, 1, 9, 112), (8, 'name', 96, 3, 9, 111), (9, 'name', 7, 180, 6, 26), (10, 'name', 7, 180, 6, 26))
+((9, 'name', '아', 2), (10, 'name', '아니', 0), (11, 'name', '그', 1), (12, 'name', '음', 0), (13, 'name', '어', 0), (14, 'name', '습', 0), (15, 'name', '엄', 0), (16, 'name', '아', 2), (17, 'name', '아니', 0), (18, 'name', '그', 1), (19', 0), (20, 'name', '어', 0), (21, 'name', '습', 0), (22, 'name', '엄', 0), (23, 'name', '아', 2), (24, 'name', '아니', 0), (25, 'name', '그', 1), (26, 'name', '음', 0), (27, 'name', '어', 0), (28, 'name', '습', 0), (29, 'name', '엄', 0)e', '아', 2), (31, 'name', '아니', 0), (32, 'name', '그', 1), (33, 'name', '음', 0), (34, 'name', '어', 0), (35, 'name', '습', 0), (36, 'name', '엄', 0))
+'''
 
 
 if __name__ == "__main__":
