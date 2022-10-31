@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 import sys, os, base64, datetime, hashlib, hmac
 import requests # pip install requests
 from habit import *
+from gazeTracking import *
 
 import boto3
 
@@ -20,7 +21,7 @@ CORS(app, resources={r'*': {'origins': ['https://letmeinterview.vercel.app', 'ht
 
 @app.route('/')
 def index():
-    my_res = flask.Response("hi")
+    my_res = {"res": "hi"}
     return my_res
 
 
@@ -146,6 +147,70 @@ def habit_post():
 
     return ret
 
+
+@app.route('/gaze', methods=['POST'])
+def gaze_post():
+    mov_data = request.files['data']
+    name = request.args.get('name')
+
+    conn = pymysql.connect(
+        user=os.environ.get("MYSQL_USER"),
+        password=os.environ.get("MYSQL_PASSWORD"),
+        host=os.environ.get("MYSQL_HOST"),
+        db=os.environ.get("MYSQL_DB"),
+        charset='utf8mb4'
+    )
+    movie_count = gaze_track(mov_data)
+    word = ["blinking", "right", "left", "center"]
+    b, r, l, c = movie_count["blinking"], movie_count["right"], movie_count["left"], movie_count["center"]
+
+    delete_file = f"./src/{mov_data.filename}"
+
+    if os.path.isfile(delete_file):
+        os.remove(delete_file)
+
+    ret = {}
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("INSERT INTO gaze (name, blinking_count, right_count, left_count, center_count) VALUES ('%s', '%s', '%s', '%s', '%s')" % (name, b, r, l, c))
+            conn.commit()
+
+    ret["blinking"] = b
+    ret["right"] = r
+    ret["left"] = l
+    ret["center"] = c
+
+    return ret
+
+
+@app.route('/form', methods=['POST'])
+def form_post():
+    data = request.files['data']
+    data.save('src/' + data.filename)
+    ret = {"msg":"success"}
+    '''    
+    ret["ret"] = data.read()
+    print(data.open())
+    print("--------------")
+
+    print(data)
+    print(dir(data))
+    print(data.headers)
+    print(data.mimetype)
+    print(data.name)
+    print(data.filename)
+
+    print(dir(data.stream))
+    print(dir(data.stream.read))
+    print(data.stream.seek(0))
+    print(dir(data.read))
+
+    print(data.stream.read)
+    print(data.save)
+    fp = data.stream().seek(0)
+    print(fp.read())
+    '''
+    return ret
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
