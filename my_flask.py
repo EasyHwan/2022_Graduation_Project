@@ -152,7 +152,10 @@ def habit_post():
             print(ret)
             sound_count = analyze_habit(f"src/{sound_data.filename}.wav")
         except Exception as ee:
-            print(str(ee))
+
+            return {
+                "msg" : str(ee)
+            }
     word = ['아', '아니', '그', '음', '어', '습', '엄']
     ret = {}
 
