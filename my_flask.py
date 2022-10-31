@@ -126,6 +126,8 @@ def s3_upload2():
 @app.route('/habit', methods=['POST'])
 def habit_post():
     sound_data = request.files['data']
+    print(sound_data.content_type)
+    print(sound_data.mimetype)
     name = request.args.get('name')
 
     conn = pymysql.connect(
@@ -207,6 +209,32 @@ def form_post():
     ret = {"msg": uname}
 
     return ret
+
+
+@app.route('/result', methods=['POST'])
+def result():
+    params = request.get_json()
+    name = params['name']
+
+    conn = pymysql.connect(
+        user=os.environ.get("MYSQL_USER"),
+        password=os.environ.get("MYSQL_PASSWORD"),
+        host=os.environ.get("MYSQL_HOST"),
+        db=os.environ.get("MYSQL_DB"),
+        charset='utf8mb4'
+    )
+
+    ret = {}
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT * FROM gaze WHERE name = ('%s')" % (name))
+            res = cur.fetchall()
+            #print(res)
+            cur.execute("SELECT * FROM habit_word WHERE name = ('%s')" % (name))
+            res = cur.fetchall()
+            #print(res)
+    return "ok"
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
