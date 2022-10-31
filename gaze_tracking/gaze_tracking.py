@@ -130,7 +130,7 @@ class GazeTracking(object):
         if self.pupils_located:
             # 원래 0.35
             temp = self.horizontal_ratio()
-            print(temp)
+            #print(temp)
             return temp <= 0.57
 
     # 함수명 : is_left
@@ -141,7 +141,7 @@ class GazeTracking(object):
     def is_left(self):
         if self.pupils_located:
             temp = self.horizontal_ratio()
-            print(temp)
+            #print(temp)
             return temp >= 0.75
     # 함수명 : is_center
     # 기능 : user가 중앙을 보고 있는지 여부를 반환한다.

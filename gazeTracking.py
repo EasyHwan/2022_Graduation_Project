@@ -19,8 +19,8 @@ def gaze_track(data):
     if webcam.isOpened():
 
         while True:
-            print("go?")
-            print(gaze.GazeScore)
+            #print("go?")
+            #print(gaze.GazeScore)
             ret, frame = webcam.read()
 
             if ret:
@@ -58,10 +58,10 @@ def gaze_track(data):
 
                 #cv2.imshow("Demo", frame)
             else:
-                print("can`t read frame")
+                #print("can`t read frame")
                 break
-    else:
-        print("Can't open video.")
+    #else:
+    #    print("Can't open video.")
 
     return gaze.GazeScore
     print(gaze.GazeScore)
