@@ -138,32 +138,23 @@ def habit_post():
         db=os.environ.get("MYSQL_DB"),
         charset='utf8mb4'
     )
+    #sound_data.save('src/' + sound_data.name)
     try:
         sound_count = analyze_habit(sound_data)
     except Exception as e:
-        try:
-            clip = moviepy.AudioFileClip(sound_data)
-            clip.write_audiofile(f"src/{sound_data.filename}.wav")
-            ret = {
-                "error":str(e),
-                "content_type":str(sound_data.content_type),
-                "mimetype": str(sound_data.mimetype)
-            }
-            print(ret)
-            sound_count = analyze_habit(f"src/{sound_data.filename}.wav")
-        except Exception as ee:
-            delete_file = f"./src/{sound_data.filename}"
-            if os.path.isfile(delete_file):
-                os.remove(delete_file)
-            return {
-                "msg" : str(ee)
-            }
+        ret = {
+            "err": str(e),
+            "content_type": str(sound_data.content_type),
+            "mimetype": str(sound_data.mimetype)
+        }
+        return ret
+
     word = ['아', '아니', '그', '음', '어', '습', '엄']
     ret = {}
 
-    delete_file = f"./src/{sound_data.filename}"
-    if os.path.isfile(delete_file):
-        os.remove(delete_file)
+    #delete_file = f"./src/{sound_data.filename}"
+    #if os.path.isfile(delete_file):
+    #    os.remove(delete_file)
 
     with conn:
         with conn.cursor() as cur:
