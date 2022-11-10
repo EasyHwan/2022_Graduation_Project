@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import os
 from flask_cors import CORS, cross_origin
 import bcrypt
-import moviepy.editor as moviepy
+from collections import defaultdict
 
 import sys, os, base64, datetime, hashlib, hmac
 import requests # pip install requests
@@ -227,10 +227,9 @@ def form_post():
     return ret
 
 
-@app.route('/result', methods=['POST'])
+@app.route('/result', methods=['GET'])
 def result():
-    params = request.get_json()
-    name = params['name']
+    name = request.args.get('name')
 
     conn = pymysql.connect(
         user=os.environ.get("MYSQL_USER"),
@@ -241,15 +240,53 @@ def result():
     )
 
     ret = {}
+    ret["habit"] = []
+    ret["gaze"] = []
+    blinking = right = left = center = 0
+    habit = defaultdict(int)
     with conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM gaze WHERE name = ('%s')" % (name))
-            res = cur.fetchall()
-            #print(res)
+            res1 = cur.fetchall()
+
+            for id, name, b, r, l, c in res1:
+                blinking += b
+                right += r
+                left += l
+                center += c
+                if l+r == 0:
+                    ratio = 0
+                else:
+                    ratio = (b+r+l+c) / (r+l)
+                temp = {
+                    "id": id,
+                    "name": name,
+                    "ratio": ratio
+                }
+                ret["gaze"].append(temp)
+            if right + left == 0:
+                gaze_ratio = 0
+            else:
+                gaze_ratio = (blinking+right+left+center) / (right+left)
+            if gaze_ratio <= 0.01:
+                gaze_grade = "상"
+            elif gaze_ratio >= 0.05:
+                gaze_grade = "하"
+            else:
+                gaze_grade = "중"
+            ret["gaze_grade"] = gaze_grade
+            ret["gaze_ratio"] = gaze_ratio
+
             cur.execute("SELECT * FROM habit_word WHERE name = ('%s')" % (name))
-            res = cur.fetchall()
-            #print(res)
-    return "ok"
+            res2 = cur.fetchall()
+
+            for id, name, text, cnt in res2:
+                habit[text] += cnt
+            sort_habit = sorted(habit.items(), key=lambda x:-x[1])
+            ret["habit"].append((sort_habit[0][0], sort_habit[0][1]))
+            ret["habit"].append((sort_habit[1][0], sort_habit[1][1]))
+            ret["habit"].append((sort_habit[2][0], sort_habit[2][1]))
+    return ret
 '''
 ((1, 'name', 53, 141, 0, 5), (2, 'name', 0, 0, 0, 0), (3, 'name', 53, 141, 0, 5), (4, 'name', 53, 141, 0, 5), (5, 'name', 7, 180, 6, 26), (6, 'name', 7, 180, 6, 26), (7, 'name', 97, 1, 9, 112), (8, 'name', 96, 3, 9, 111), (9, 'name', 7, 180, 6, 26), (10, 'name', 7, 180, 6, 26))
 ((9, 'name', '아', 2), (10, 'name', '아니', 0), (11, 'name', '그', 1), (12, 'name', '음', 0), (13, 'name', '어', 0), (14, 'name', '습', 0), (15, 'name', '엄', 0), (16, 'name', '아', 2), (17, 'name', '아니', 0), (18, 'name', '그', 1), (19', 0), (20, 'name', '어', 0), (21, 'name', '습', 0), (22, 'name', '엄', 0), (23, 'name', '아', 2), (24, 'name', '아니', 0), (25, 'name', '그', 1), (26, 'name', '음', 0), (27, 'name', '어', 0), (28, 'name', '습', 0), (29, 'name', '엄', 0)e', '아', 2), (31, 'name', '아니', 0), (32, 'name', '그', 1), (33, 'name', '음', 0), (34, 'name', '어', 0), (35, 'name', '습', 0), (36, 'name', '엄', 0))
