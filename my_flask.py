@@ -299,12 +299,12 @@ def gara_result():
             {
                 "id": 1,
                 "name": "name",
-                "ratio": 0.9113475177304964
+                "ratio": 0.0113475177304964
             },
             {
                 "id": 2,
                 "name": "name",
-                "ratio": 0.1134751773049643
+                "ratio": 0.2134751773049643
             },
             {
                 "id": 3,
@@ -319,10 +319,10 @@ def gara_result():
             {
                 "id": 5,
                 "name": "name",
-                "ratio": 0.1774193548387097
+                "ratio": 0.0774193548387097
             }
         ],
-        "gaze_grade": "상",
+        "gaze_grade": "하",
         "gaze_ratio": 0.0972329688814129,
         "habit": [
             [
@@ -353,7 +353,7 @@ def gara_result():
             {
                 "id": 3,
                 "name": "name",
-                "ratio": 0.0413475177304964
+                "ratio": 0.8413475177304964
             },
             {
                 "id": 4,
@@ -366,7 +366,7 @@ def gara_result():
                 "ratio": 0.1774193548387097
             }
         ],
-        "emotion_grade": "하",
+        "emotion_grade": "중",
         "emotion_ratio": 0.6072329688814129,
     }
     return ret
