@@ -208,7 +208,7 @@ def form_post():
     name = params['name']
     b = bcrypt.hashpw(name.encode('utf-8'), bcrypt.gensalt())
     b = b.decode('utf-8')
-    uname = name + "#" + b[9:13].upper()
+    uname = name + b[9:13].upper()
 
     conn = pymysql.connect(
         user=os.environ.get("MYSQL_USER"),
@@ -257,7 +257,7 @@ def result():
                 if l+r == 0:
                     ratio = 0
                 else:
-                    ratio = (b+r+l+c) / (r+l)
+                    ratio = (r+l) / (b+r+l+c)
                 temp = {
                     "id": id,
                     "name": name,
@@ -267,7 +267,7 @@ def result():
             if right + left == 0:
                 gaze_ratio = 0
             else:
-                gaze_ratio = (blinking+right+left+center) / (right+left)
+                gaze_ratio = (right+left) / (blinking+right+left+center)
             if gaze_ratio <= 0.01:
                 gaze_grade = "상"
             elif gaze_ratio >= 0.05:
