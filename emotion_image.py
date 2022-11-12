@@ -3,6 +3,7 @@ from fer import FER
 import os
 import sys
 import pandas as pd
+import cv2
 
 img = cv2.imread("/home/ec2-user/project/2022_Graduation_Project/hismile.jpg")
 detector = FER()
