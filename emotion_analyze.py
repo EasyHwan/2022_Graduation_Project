@@ -4,12 +4,12 @@ import os
 import sys
 import pandas as pd
 
-location_vedeofile = "/home/ec2-user/project/2022_Graduation_Project/himan.mp4"
+location_vedeofile = "himan.mp4"
 
 face_detector = FER()
 input_video = Video(location_vedeofile)
 
-processing_data = input_video.analyze(face_detector, display=False)
+processing_data = input_video.analyze(face_detector, display=False, frequency=6)
 vid_df = input_video.to_pandas(processing_data)
 vid_df = input_video.get_first_face(vid_df)
 vid_df = input_video.get_emotions(vid_df)
