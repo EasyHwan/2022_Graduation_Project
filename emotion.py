@@ -4,8 +4,6 @@ import imutils
 import cv2
 from keras.models import load_model
 import numpy as np
-from gaze_tracking import GazeTracking
-import os
 
 # 함수명 : test_start
 # 기능 : 전체 분석을 시작하기 위한 함수
