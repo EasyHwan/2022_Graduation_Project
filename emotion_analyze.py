@@ -6,7 +6,7 @@ import pandas as pd
 
 location_vedeofile = "/home/ec2-user/project/2022_Graduation_Project/himan.mp4"
 
-face_detector = FER(mtcnn=True)
+face_detector = FER()
 input_video = Video(location_vedeofile)
 
 processing_data = input_video.analyze(face_detector, display=False)
