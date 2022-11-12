@@ -27,7 +27,7 @@ def test_start():
     emotionVal = 0
 
     # 비디오 스트리밍 시작
-    cv2.namedWindow('your_face')
+    #cv2.namedWindow('your_face')
     camera = cv2.VideoCapture("himan.mp4")
     while True:
         frame = camera.read()[1]
