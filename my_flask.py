@@ -244,6 +244,7 @@ def result():
     ret["gaze"] = []
     blinking = right = left = center = 0
     habit = defaultdict(int)
+    habit_sum = 0
     with conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM gaze WHERE name = ('%s')" % (name))
@@ -282,10 +283,12 @@ def result():
 
             for id, name, text, cnt in res2:
                 habit[text] += cnt
+                habit_sum += cnt
             sort_habit = sorted(habit.items(), key=lambda x:-x[1])
             ret["habit"].append((sort_habit[0][0], sort_habit[0][1]))
             ret["habit"].append((sort_habit[1][0], sort_habit[1][1]))
             ret["habit"].append((sort_habit[2][0], sort_habit[2][1]))
+            ret["habit_sum"] = habit_sum
     return ret
 
 
@@ -319,8 +322,8 @@ def gara_result():
                 "ratio": 0.1774193548387097
             }
         ],
-        "gaze_grade": "하",
-        "gaze_ratio": 0.6072329688814129,
+        "gaze_grade": "상",
+        "gaze_ratio": 0.0972329688814129,
         "habit": [
             [
                 "아",
@@ -332,9 +335,10 @@ def gara_result():
             ],
             [
                 "아니",
-                0
+                1
             ]
         ],
+        "habit_sum": 15,
         "emotion": [
             {
                 "id": 1,
