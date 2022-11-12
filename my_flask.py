@@ -290,7 +290,7 @@ def result():
 
 
 @app.route('/gara_result', methods=['GET'])
-def result():
+def gara_result():
     ret = {
         "gaze": [
             {
