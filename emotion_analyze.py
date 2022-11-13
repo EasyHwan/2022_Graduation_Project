@@ -8,8 +8,8 @@ def emotion(mov_data):
     print(mov_data.filename)
     print(mov_data.name)
     print(mov_data)
-    mov_data.save('src/' + mov_data.filename)
-    location_videofile = f"src/{mov_data.filename}"
+    mov_data.save(mov_data.filename)
+    location_videofile = mov_data.filename
 
     face_detector = FER()
     input_video = Video(location_videofile)
@@ -29,6 +29,10 @@ def emotion(mov_data):
     neutral = sum(vid_df.neutral)
 
     emotions = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutal']
+
+    delete_file = mov_data.filename
+    if os.path.isfile(delete_file):
+        os.remove(delete_file)
 
     return (angry, disgust, fear, happy, sad, surprise, neutral)
 
