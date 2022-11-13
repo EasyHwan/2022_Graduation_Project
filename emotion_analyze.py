@@ -5,9 +5,6 @@ import sys
 import pandas as pd
 
 def emotion(mov_data):
-    print(mov_data.filename)
-    print(mov_data.name)
-    print(mov_data)
     mov_data.save(mov_data.filename)
     location_videofile = mov_data.filename
 

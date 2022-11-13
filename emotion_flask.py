@@ -26,6 +26,14 @@ def index():
 
 @app.route('/emotion', methods=['POST'])
 def emotion_post():
+
+    conn = pymysql.connect(
+        user=os.environ.get("MYSQL_USER"),
+        password=os.environ.get("MYSQL_PASSWORD"),
+        host=os.environ.get("MYSQL_HOST"),
+        db=os.environ.get("MYSQL_DB"),
+        charset='utf8mb4'
+    )
     mov_data = request.files['data']
     name = request.args.get('name')
     angry, disgust, fear, happy, sad, surprise, neutral = emotion(mov_data)
@@ -39,6 +47,12 @@ def emotion_post():
         "surprise": surprise,
         "neutral": neutral,
     }
+
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("INSERT INTO emotion (name, angry, disgust, fear, happy, sad, surprise, neutral) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (name, angry, disgust, fear, happy, sad, surprise, neutral))
+            conn.commit()
+
     return ret
 
 
