@@ -4,11 +4,12 @@ import os
 import sys
 import pandas as pd
 
-def emotion(emotion_data):
-    location_vedeofile = emotion_data
+def emotion(mov_data):
+    mov_data.save('src/' + mov_data.filename)
+    location_videofile = f"src/{mov_data.filename}"
 
     face_detector = FER()
-    input_video = Video(location_vedeofile)
+    input_video = Video(location_videofile)
 
     processing_data = input_video.analyze(face_detector, display=False, frequency=6)
     vid_df = input_video.to_pandas(processing_data)

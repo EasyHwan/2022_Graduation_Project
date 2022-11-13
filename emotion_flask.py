@@ -29,6 +29,11 @@ def emotion_post():
     mov_data = request.files['data']
     name = request.args.get('name')
     angry, disgust, fear, happy, sad, surprise, neutral = emotion(mov_data)
+
+    delete_file = f"src/{mov_data.filename}"
+    if os.path.isfile(delete_file):
+        os.remove(delete_file)
+
     ret = {
         "angry": angry,
         "disgust": disgust,
