@@ -28,7 +28,7 @@ def index():
 def emotion_post():
     mov_data = request.files['data']
     name = request.args.get('name')
-    angry, disgust, fear, happy, sad, surprise, neutral = emotion(data)
+    angry, disgust, fear, happy, sad, surprise, neutral = emotion(mov_data)
     ret = {
         "angry": angry,
         "disgust": disgust,
