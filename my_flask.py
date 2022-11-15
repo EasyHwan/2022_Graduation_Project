@@ -286,9 +286,9 @@ def result():
                 habit[text] += cnt
                 habit_sum += cnt
             sort_habit = sorted(habit.items(), key=lambda x:-x[1])
-            ret["habit"].append((sort_habit[0][0], sort_habit[0][1]))
-            ret["habit"].append((sort_habit[1][0], sort_habit[1][1]))
-            ret["habit"].append((sort_habit[2][0], sort_habit[2][1]))
+
+            for i in range(7):
+                ret["habit"].append((sort_habit[i][0], sort_habit[i][1]))
             ret["habit_sum"] = habit_sum
 
             cur.execute("SELECT * FROM emotion WHERE name = ('%s')" % (name))
