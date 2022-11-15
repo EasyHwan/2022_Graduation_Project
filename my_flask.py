@@ -242,6 +242,7 @@ def result():
     ret = {}
     ret["habit"] = []
     ret["gaze"] = []
+    ret["emotion"] = []
     blinking = right = left = center = 0
     habit = defaultdict(int)
     habit_sum = 0
@@ -289,6 +290,37 @@ def result():
             ret["habit"].append((sort_habit[1][0], sort_habit[1][1]))
             ret["habit"].append((sort_habit[2][0], sort_habit[2][1]))
             ret["habit_sum"] = habit_sum
+
+            cur.execute("SELECT * FROM emotion WHERE name = ('%s')" % (name))
+            res3 = cur.fetchall()
+
+            sum_not_happy = 0
+            sum_happy = 0
+            for id, name, angry, disgust, fear, happy, sad, surprise, neutral in res3:
+                not_happy = angry + disgust + fear + sad + surprise + neutral
+                sum_not_happy += not_happy
+                sum_happy += happy
+                if not_happy == 0:
+                    emotion_ratio = 0
+                else:
+                    emotion_ratio = happy / not_happy
+                temp_emotion = {
+                    "id": id,
+                    "name": name,
+                    "emotion_ratio": emotion_ratio
+                }
+
+                ret["emotion"].append(temp_emotion)
+
+            sum_emotion_ratio = sum_happy / sum_not_happy
+            if sum_emotion_ratio > 0.6:
+                emotion_grade = "상"
+            elif sum_emotion_ratio < 0.3:
+                emotion_grade = "하"
+            else:
+                emotion_grade = "중"
+            ret["emotion_grade"] = emotion_grade
+
     return ret
 
 
