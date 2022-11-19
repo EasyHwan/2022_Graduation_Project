@@ -5,21 +5,23 @@
     flex-direction: column;
     text-align: center;
     height: 100vh;
+    font-family: 'NotoSansKR';
 }
 .currentPage{
-    width: 35vh;
+    width: 280px;
     margin-top: 10px;
 }
 .cameraBox{
     margin-top: 50px;
     width: 50%;
     min-width: 600px;
+    min-height: 500px;
     margin-bottom: 20px;
 }
 .emptySpace{
     width: 50%;
     min-width: 600px;
-    height: 360px;
+    min-height: 360px;
     margin-top: 50px;
     margin-bottom: 20px;
     background-color: #535b67;
@@ -33,15 +35,12 @@
     background: #b8d1f6;
     padding: 30px;
     width: 50%;
+    min-width: 600px;
     height: 100px;
     margin-bottom: 50px;
 }
-.fontStyle{
-    font-family: 'Noto Sans KR';
-    font-weight: bold;
-}
 .cameraCheck{
-    width: 260px;
+    width: 280px;
     height: 50px;
     color: #1E84FD;;
     background: white;
@@ -51,13 +50,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-right: 10px;
+    padding: 10px;
 }
 .button{
-    width: 260px;
+    width: 200px;
     height: 50px;
     background: #1E84FD;
-    font-weight: bold;
     color: white;
     border: none;
     box-shadow: 0px 4px 4px rgba(24, 30, 68, 0.25);
