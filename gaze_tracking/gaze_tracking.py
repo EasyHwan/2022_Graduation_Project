@@ -29,8 +29,7 @@ class GazeTracking(object):
 
         # 주어진 얼굴에서부터 랜드마크를 얻는다.
         cwd = os.path.abspath(os.path.dirname(__file__))
-        model_path = os.path.abspath(os.path.join(
-            cwd, "trained_models/shape_predictor_68_face_landmarks.dat"))
+        model_path = os.path.abspath(os.path.join(cwd, "trained_models/shape_predictor_68_face_landmarks.dat"))
         self._predictor = dlib.shape_predictor(model_path)
 
     # 함수명 : pupils_located
@@ -131,8 +130,8 @@ class GazeTracking(object):
         if self.pupils_located:
             # 원래 0.35
             temp = self.horizontal_ratio()
-            print(temp)
-            return temp <= 0.57
+            #print(temp)
+            return temp <= 0.45
 
     # 함수명 : is_left
     # 기능 : user가 왼쪽을 보고 있는지 여부를 반환한다.
@@ -142,8 +141,8 @@ class GazeTracking(object):
     def is_left(self):
         if self.pupils_located:
             temp = self.horizontal_ratio()
-            print(temp)
-            return temp >= 0.75
+            #print(temp)
+            return temp >= 0.7
     # 함수명 : is_center
     # 기능 : user가 중앙을 보고 있는지 여부를 반환한다.
     # 매개변수 : self(자기 자신 객체)
