@@ -297,7 +297,7 @@ def result():
             sum_not_happy = 0
             sum_happy = 0
             for id, name, angry, disgust, fear, happy, sad, surprise, neutral in res3:
-                not_happy = angry + disgust + fear + sad + surprise + (neutral//2)
+                not_happy = angry + disgust + fear + sad + surprise + (neutral//2) + happy
                 sum_not_happy += not_happy
                 sum_happy += happy
                 if not_happy == 0:
