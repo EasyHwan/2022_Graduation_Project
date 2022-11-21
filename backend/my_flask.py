@@ -269,10 +269,10 @@ def result():
             if right + left == 0:
                 gaze_ratio = 0
             else:
-                gaze_ratio = (right+left) / ((blinking*1.5)+right+left+center)
-            if gaze_ratio <= 0.01:
+                gaze_ratio = (right+left) / (blinking+right+left+center)
+            if gaze_ratio <= 0.2:
                 gaze_grade = "상"
-            elif gaze_ratio >= 0.05:
+            elif gaze_ratio >= 0.3:
                 gaze_grade = "하"
             else:
                 gaze_grade = "중"
