@@ -270,9 +270,9 @@ def result():
                 gaze_ratio = 0
             else:
                 gaze_ratio = (right+left) / (blinking+right+left+center)
-            if gaze_ratio <= 0.01:
+            if gaze_ratio <= 0.2:
                 gaze_grade = "상"
-            elif gaze_ratio >= 0.05:
+            elif gaze_ratio >= 0.3:
                 gaze_grade = "하"
             else:
                 gaze_grade = "중"
@@ -297,7 +297,7 @@ def result():
             sum_not_happy = 0
             sum_happy = 0
             for id, name, angry, disgust, fear, happy, sad, surprise, neutral in res3:
-                not_happy = angry + disgust + fear + sad + surprise + neutral
+                not_happy = angry + disgust + fear + sad + surprise + (neutral//2) + happy
                 sum_not_happy += not_happy
                 sum_happy += happy
                 if not_happy == 0:
