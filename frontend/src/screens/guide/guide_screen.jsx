@@ -32,7 +32,7 @@ function Guide () {
               disableOnInteraction: false
           }}
           className={style.swiper}
-          style={{height : '420px'}}
+          style={{height : '500px'}}
         >
           <SwiperSlide className={style.imgBox}>
               <div className={style.imagespace}>
