@@ -141,13 +141,13 @@ function Partial() {
                         <hr/>
                         <p style={{fontWeight : 'bold', fontSize : 24}}>총 평가 : <label style={{color:'#1E84FD'}}>{result.gaze_grade}</label></p>
                         <p style={{fontSize : 16}}>면접 응답을 진행한 동안 측정된 영상에 대한 시선처리 결과를 반환합니다. 중앙을 잘 응시하지 못하여 연습이 필요한 문항을 저장하여
-                            부족했던 답변에 대해 연습할 수 있도록 제공합니다. (ratio의 비율이 0.01과 가깝고 작을수록 좋은 결과에 가깝습니다.)
+                            부족했던 답변에 대해 연습할 수 있도록 제공합니다. (ratio의 비율이 0.2와 가깝고 작을수록 좋은 결과에 가깝습니다.)
                         </p>
                         <br/>
                         <p style={{fontWeight : 'bold', fontSize : 20}}>👇 연습이 필요한 문항 👇</p>
                         {
                             result.gaze.map((res, index)=>{
-                                if (res.ratio > 0.05){
+                                if (res.ratio > 0.3){
                                     return(
                                         <>
                                             <p style={{fontWeight : 'bold', fontSize : 16}} key={res}>{index + 1}번째 문항 - {contents[index]}</p>
